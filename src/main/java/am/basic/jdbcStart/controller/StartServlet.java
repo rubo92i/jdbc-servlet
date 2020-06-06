@@ -30,6 +30,7 @@ public class StartServlet extends HttpServlet {
             response.sendRedirect(INDEX_PAGE);
             return;
         }
+
         String token = null;
         try {
             token = Encryptor.decrypt(rememberMeCookie.getValue());
