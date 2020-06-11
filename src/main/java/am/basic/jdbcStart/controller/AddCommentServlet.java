@@ -15,6 +15,8 @@ import java.io.IOException;
 import static am.basic.jdbcStart.util.constants.Pages.HOME_PAGE;
 import static am.basic.jdbcStart.util.constants.ParameterKeys.*;
 
+
+///dasda
 public class AddCommentServlet extends HttpServlet {
 
     private CommentService commentService = new CommentService();
