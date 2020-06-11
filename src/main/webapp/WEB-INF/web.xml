@@ -114,6 +114,15 @@
     </servlet-mapping>
 
 
+    <servlet>
+        <servlet-name>AddCommentServlet</servlet-name>
+        <servlet-class>am.basic.jdbcStart.controller.AddCommentServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddCommentServlet</servlet-name>
+        <url-pattern>/secure/add-comment</url-pattern>
+    </servlet-mapping>
 
 
     <servlet>

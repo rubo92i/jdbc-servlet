@@ -21,4 +21,6 @@ public interface ParameterKeys {
     String MESSAGE_ATTRIBUTE_KEY = "message";
 
     String USER_ATTRIBUTE_KEY = "user";
-}
+
+    String DESCRIPTION_PARAM_KEY = "description";
+ }
