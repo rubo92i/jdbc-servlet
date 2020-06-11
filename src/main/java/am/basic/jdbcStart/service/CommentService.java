@@ -30,4 +30,13 @@ public class CommentService  {
             throw new InternalServerException(INTERNAL_ERROR_MESSAGE);
         }
     }
+
+    public void delete(int id) throws InternalServerException {
+        try {
+            commentRepository.delete(id);
+        }catch (SQLException ex){
+            ex.printStackTrace();
+            throw new InternalServerException(INTERNAL_ERROR_MESSAGE);
+        }
+    }
 }

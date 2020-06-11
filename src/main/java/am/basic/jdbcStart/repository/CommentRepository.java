@@ -48,4 +48,11 @@ public class CommentRepository {
         comment.setUserId(resultSet.getInt("user_id"));
         return comment;
     }
+
+    public void delete(int id) throws SQLException {
+        PreparedStatement preparedStatement = dataSource.getConnection().prepareStatement("DELETE FROM comment WHERE id = ?");
+        preparedStatement.setInt(1, id);
+        preparedStatement.executeUpdate();
+
+    }
 }

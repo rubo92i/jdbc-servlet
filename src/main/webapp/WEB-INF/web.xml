@@ -28,6 +28,7 @@
         <servlet-class>am.basic.jdbcStart.controller.RegisterServlet</servlet-class>
     </servlet>
 
+
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -126,6 +127,18 @@
 
 
     <servlet>
+        <servlet-name>DeleteCommentServlet</servlet-name>
+        <servlet-class>am.basic.jdbcStart.controller.DeleteCommentServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteCommentServlet</servlet-name>
+        <url-pattern>/secure/delete-comment</url-pattern>
+    </servlet-mapping>
+
+
+
+    <servlet>
         <servlet-name>CookeTestServlet</servlet-name>
         <servlet-class>am.basic.jdbcStart.controller.CookeTestServlet</servlet-class>
     </servlet>
@@ -134,6 +147,8 @@
         <servlet-name>CookeTestServlet</servlet-name>
         <url-pattern>/cookie</url-pattern>
     </servlet-mapping>
+
+
 
 
 

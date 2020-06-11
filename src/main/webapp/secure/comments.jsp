@@ -35,6 +35,12 @@
         </td>
         <td><%=comment.getDescription()%>
         </td>
+        <td>
+            <form method="post" action="/secure/delete-comment">
+                <input type="hidden" name="id" value="<%=comment.getId()%>">
+                <input type="submit" value="DELETE">
+            </form>
+        </td>
     <%
         }
     %>
