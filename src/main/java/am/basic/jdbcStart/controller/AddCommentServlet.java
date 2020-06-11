@@ -18,7 +18,7 @@ import static am.basic.jdbcStart.util.constants.ParameterKeys.*;
 
 ///dasda
 public class AddCommentServlet extends HttpServlet {
-
+//sdsdf
     private CommentService commentService = new CommentService();
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
