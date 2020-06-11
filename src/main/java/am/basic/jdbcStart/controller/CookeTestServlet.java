@@ -13,7 +13,6 @@ import static am.basic.jdbcStart.util.constants.Pages.INDEX_PAGE;
 public class CookeTestServlet extends HttpServlet {
 
 
-    //test comment for scm
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Cookie[] cookies = request.getCookies();
