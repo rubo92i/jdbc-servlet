@@ -1,28 +1,34 @@
 package am.basic.jdbcStart.util.encoder;
 
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 
 public class Md5Encoder {
 
-    private static MessageDigest md;
-
-    static {
+    public static String encode(CharSequence rawPassword) {
         try {
-            md = MessageDigest.getInstance("MD5");
+            MessageDigest digest = MessageDigest.getInstance("MD5");
+            digest.update(rawPassword.toString().getBytes());
+            byte[] messageDigest = digest.digest();
+
+            StringBuilder hexString = new StringBuilder();
+            for (byte aMessageDigest : messageDigest) {
+                StringBuilder h = new StringBuilder(Integer.toHexString(0xFF & aMessageDigest));
+                while (h.length() < 2) {
+                    h.insert(0, "0");
+                }
+                hexString.append(h);
+            }
+            return hexString.toString();
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+             return null;
         }
     }
 
 
-    public static String encode(String toEncode) {
-        return new String(md.digest(toEncode.getBytes(StandardCharsets.UTF_8)));
-    }
 
-
-    public static boolean matches(String clean, String encoded) {
-        return encode(clean).equals(encoded);
+    public static boolean matches(String plain,String encoded){
+        return Objects.equals(encode(plain), encoded);
     }
 }

@@ -22,7 +22,7 @@ public class UserService {
         try {
             User duplicate = userRepository.getByUsername(user.getUsername());
             DuplicateDataException.check(duplicate != null, DUPLICATE_USER_MESSAGE);
-           // user.setPassword(Md5Encoder.encode(user.getPassword()));
+            user.setPassword(Md5Encoder.encode(user.getPassword()));
             user.setCode(Generator.getRandomDigits(5));
             user.setStatus(0);
             userRepository.add(user);
@@ -38,7 +38,7 @@ public class UserService {
     public User login(String username, String password) throws InternalServerException, NotFoundException, UnverifiedException {
         try {
             User user = userRepository.getByUsername(username);
-            NotFoundException.check(user == null /*|| !Md5Encoder.matches(password, user.getPassword())*/, INVALID_CREDENTIALS_MESSAGE);
+            NotFoundException.check(user == null || !Md5Encoder.matches(password, user.getPassword()), INVALID_CREDENTIALS_MESSAGE);
             UnverifiedException.check(user.getStatus() != 1, UNVERIFIED_MESSAGE);
             return user;
         } catch (SQLException e) {
