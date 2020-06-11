@@ -16,7 +16,7 @@ import static am.basic.jdbcStart.util.constants.Pages.HOME_PAGE;
 import static am.basic.jdbcStart.util.constants.ParameterKeys.*;
 
 public class AddCommentServlet extends HttpServlet {
-
+//sdsdf
     private CommentService commentService = new CommentService();
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
