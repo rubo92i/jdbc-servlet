@@ -1,4 +1,4 @@
-package am.basic.jdbcStart.repository;
+package am.basic.jdbcStart.repository.impl.jdbc;
 
 import am.basic.jdbcStart.model.Student;
 import am.basic.jdbcStart.util.DataSource;
