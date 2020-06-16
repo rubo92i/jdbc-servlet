@@ -1,12 +1,12 @@
 package am.basic.jdbcStart.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Objects;
+import lombok.Data;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Data
 @Entity
 public class Student {
 
@@ -20,63 +20,21 @@ public class Student {
 
     private int balance;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fakultet_id", referencedColumnName = "id")
+    private Fakultet fakultet;
 
-    public int getId() {
-        return id;
-    }
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    private List<Book> books;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "students_teaches",
+            joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "teacher_id", referencedColumnName = "id"))
+    private List<Teacher> teachers;
 
-    public String getName() {
-        return name;
-    }
+    @Enumerated(value = EnumType.STRING)
+    private StudentType studentType;
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public int getBalance() {
-        return balance;
-    }
-
-    public void setBalance(int balance) {
-        this.balance = balance;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Student student = (Student) o;
-        return id == student.id &&
-                balance == student.balance &&
-                Objects.equals(name, student.name) &&
-                Objects.equals(surname, student.surname);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, surname, balance);
-    }
-
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", balance=" + balance +
-                '}';
-    }
 }
