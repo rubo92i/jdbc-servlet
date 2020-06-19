@@ -29,7 +29,7 @@ public class Student {
     private List<Book> books;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "students_teaches",
+    @JoinTable(name = "students_teachers",
             joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "teacher_id", referencedColumnName = "id"))
     private List<Teacher> teachers;
