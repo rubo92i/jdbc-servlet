@@ -23,8 +23,9 @@ public class HibernateUtil {
                 settings.put(Environment.URL, "jdbc:mysql://localhost:3306/test");
                 settings.put(Environment.USER, "root");
                 settings.put(Environment.PASS, "");
-                settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5InnoDBDialect");
+                settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL57Dialect");
                 settings.put(Environment.SHOW_SQL, "true");
+                settings.put(Environment.STORAGE_ENGINE,"innodb");
               //  settings.put(Environment.FORMAT_SQL, "true");
                 settings.put(Environment.HBM2DDL_AUTO, "update");
 
