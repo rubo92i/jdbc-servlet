@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-init-method="init">
+
+
+    <bean name="dataSource" class="am.basic.jdbcStart.util.DataSource">
+        <property name="url" value="jdbc:mysql://localhost:3306/test"/>
+        <property name="username" value="root"/>
+        <property name="password" value=""/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+    </bean>
+
+
+    <bean name="userRepositoryJpa" class="am.basic.jdbcStart.repository.impl.jpa.UserRepositoryJpaImpl" init-method="onCreate"/>
+
+
+    <bean name="userRepositoryJdbc" class="am.basic.jdbcStart.repository.impl.jdbc.UserRepositoryJdbcImpl">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
+
+
+    <bean name="CommentRepositoryJdbc" class="am.basic.jdbcStart.repository.impl.jdbc.CommentRepositoryJdbcImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+
+</beans>

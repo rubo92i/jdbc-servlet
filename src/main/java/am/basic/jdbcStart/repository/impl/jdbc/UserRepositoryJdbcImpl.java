@@ -21,6 +21,10 @@ public class UserRepositoryJdbcImpl implements UserRepository {
         this.dataSource = dataSource;
     }
 
+    public void init(){
+        System.out.println("creating user repository jdbc");
+    }
+
     @Override
     public void add(User user) {
         try {

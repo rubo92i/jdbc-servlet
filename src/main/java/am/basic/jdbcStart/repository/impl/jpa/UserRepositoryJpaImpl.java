@@ -17,6 +17,10 @@ public class UserRepositoryJpaImpl implements UserRepository {
 
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
+    public void onCreate(){
+        System.out.println("creating user repository jpa");
+    }
+
     @Override
     public void add(User user) {
         Session session = sessionFactory.openSession();

@@ -15,7 +15,7 @@ public class CommentService  {
 
 
 
-    private CommentRepository commentRepository = new CommentRepositoryJdbcImpl(new DataSource());
+    private CommentRepository commentRepository = new CommentRepositoryJdbcImpl();
 
 
 

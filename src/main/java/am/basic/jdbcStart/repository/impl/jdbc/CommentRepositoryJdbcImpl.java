@@ -14,9 +14,6 @@ public class CommentRepositoryJdbcImpl implements CommentRepository {
 
     private DataSource dataSource;
 
-    public CommentRepositoryJdbcImpl(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
 
     @Override
     public List<Comment> getByUserId(int userId) throws SQLException {
@@ -62,4 +59,12 @@ public class CommentRepositoryJdbcImpl implements CommentRepository {
         return comment;
     }
 
+
+    public DataSource getDataSource() {
+        return dataSource;
+    }
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 }

@@ -26,7 +26,6 @@ public class HibernateUtil {
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL57Dialect");
                 settings.put(Environment.SHOW_SQL, "true");
                 settings.put(Environment.STORAGE_ENGINE,"innodb");
-              //  settings.put(Environment.FORMAT_SQL, "true");
                 settings.put(Environment.HBM2DDL_AUTO, "update");
 
 

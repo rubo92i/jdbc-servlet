@@ -1,25 +1,30 @@
 package am.basic.jdbcStart.util;
 
+import lombok.Data;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+@Data
 public class DataSource {
 
 
-    private  Connection connection;
+    private Connection connection;
 
-    /*  jdbc:{databaseType}://{databaseIp or hostname}:{database port}/{schemaName} */
-    private static final String url = "jdbc:mysql://localhost:3306/test";
+    private String url;
 
-    private static final String username = "root";
+    private String username;
 
-    private static final String password = "";
+    private String password;
 
-    public  Connection getConnection() {
+    private String driverClassName;
+
+
+    public Connection getConnection() {
         try {
             if (connection == null || connection.isClosed()) {
-                Class clazz = Class.forName("com.mysql.jdbc.Driver");
+                Class clazz = Class.forName(driverClassName);
                 connection = DriverManager.getConnection(url, username, password);
             }
             return connection;
@@ -28,5 +33,6 @@ public class DataSource {
             throw new RuntimeException(e);
         }
     }
+
 
 }
