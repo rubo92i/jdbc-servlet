@@ -2,8 +2,8 @@ package am.basic.jdbcStart.repository.impl.jdbc;
 
 import am.basic.jdbcStart.model.Comment;
 import am.basic.jdbcStart.repository.CommentRepository;
-import am.basic.jdbcStart.util.DataSource;
 
+import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -3,8 +3,8 @@ package am.basic.jdbcStart.repository.impl.jdbc;
 import am.basic.jdbcStart.model.User;
 import am.basic.jdbcStart.model.exceptions.DatabaseException;
 import am.basic.jdbcStart.repository.UserRepository;
-import am.basic.jdbcStart.util.DataSource;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

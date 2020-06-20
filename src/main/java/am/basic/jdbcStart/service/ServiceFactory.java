@@ -2,7 +2,6 @@ package am.basic.jdbcStart.service;
 
 import am.basic.jdbcStart.repository.impl.jdbc.UserRepositoryJdbcImpl;
 import am.basic.jdbcStart.repository.impl.jpa.UserRepositoryJpaImpl;
-import am.basic.jdbcStart.util.DataSource;
 
 public class ServiceFactory {
 
@@ -13,7 +12,7 @@ public class ServiceFactory {
         if (usJpa) {
             return new UserService(new UserRepositoryJpaImpl());
         } else {
-            return new UserService(new UserRepositoryJdbcImpl(new DataSource()));
+            return new UserService(new UserRepositoryJdbcImpl(null ));
         }
     }
 }

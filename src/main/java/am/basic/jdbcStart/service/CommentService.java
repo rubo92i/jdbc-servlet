@@ -4,7 +4,6 @@ import am.basic.jdbcStart.model.Comment;
 import am.basic.jdbcStart.model.exceptions.InternalServerException;
 import am.basic.jdbcStart.repository.CommentRepository;
 import am.basic.jdbcStart.repository.impl.jdbc.CommentRepositoryJdbcImpl;
-import am.basic.jdbcStart.util.DataSource;
 
 import java.sql.SQLException;
 import java.util.List;

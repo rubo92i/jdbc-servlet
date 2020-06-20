@@ -5,15 +5,25 @@
        default-init-method="init">
 
 
-    <bean name="dataSource" class="am.basic.jdbcStart.util.DataSource">
+    <bean name="dataSource" class="org.springframework.jdbc.datasource.SingleConnectionDataSource">
         <property name="url" value="jdbc:mysql://localhost:3306/test"/>
         <property name="username" value="root"/>
         <property name="password" value=""/>
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
     </bean>
 
+    <bean name="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
 
-    <bean name="userRepositoryJpa" class="am.basic.jdbcStart.repository.impl.jpa.UserRepositoryJpaImpl" init-method="onCreate"/>
+    <bean name="userRepositorySpringJdbc"
+          class="am.basic.jdbcStart.repository.impl.spring.jdbc.UserRepositorySpringJdbcImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+
+    <bean name="userRepositoryJpa" class="am.basic.jdbcStart.repository.impl.jpa.UserRepositoryJpaImpl"
+          init-method="onCreate"/>
 
 
     <bean name="userRepositoryJdbc" class="am.basic.jdbcStart.repository.impl.jdbc.UserRepositoryJdbcImpl">
@@ -25,5 +35,19 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+
+    <bean name="sonyFoot" class="am.basic.jdbcStart.robot.foot.SonyFoot"/>
+
+    <bean name="toshibaFoot" class="am.basic.jdbcStart.robot.foot.ToshibaFoot"/>
+
+    <bean name="hand" class="am.basic.jdbcStart.robot.hand.Hand"/>
+
+    <bean name="head" class="am.basic.jdbcStart.robot.head.Head"/>
+
+    <bean name="robot" class="am.basic.jdbcStart.robot.Robot">
+        <constructor-arg name="foot" ref="toshibaFoot"/>
+        <constructor-arg name="hand" ref="hand"/>
+        <constructor-arg name="head" ref="head"/>
+    </bean>
 
 </beans>

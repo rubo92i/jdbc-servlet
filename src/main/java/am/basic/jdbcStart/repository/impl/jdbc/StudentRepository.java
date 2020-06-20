@@ -1,17 +1,18 @@
 package am.basic.jdbcStart.repository.impl.jdbc;
 
 import am.basic.jdbcStart.model.Student;
-import am.basic.jdbcStart.util.DataSource;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StudentRepository {
 
-     private DataSource dataSource;
+    private DataSource dataSource;
 
     public StudentRepository(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -126,13 +127,12 @@ public class StudentRepository {
     }
 
 
-
-
-    public void transfer(Student from, Student to, int amount)  {
-        Connection connection = dataSource.getConnection();
+    public void transfer(Student from, Student to, int amount) {
+        Connection connection = null;
 
 
         try {
+            connection = dataSource.getConnection();
             connection.setReadOnly(false);
             connection.setAutoCommit(false);
             connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
@@ -149,7 +149,7 @@ public class StudentRepository {
             System.out.println("before commit");
             connection.commit();
             System.out.println("after commit commit");
-         } catch (Throwable throwable) {
+        } catch (Throwable throwable) {
             throwable.printStackTrace();
             try {
                 connection.rollback();
