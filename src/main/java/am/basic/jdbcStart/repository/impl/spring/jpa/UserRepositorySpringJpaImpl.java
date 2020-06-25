@@ -22,27 +22,11 @@ public class UserRepositorySpringJpaImpl implements UserRepository {
 
 
 
-
-
-
-
-
-
     @Override
     @Transactional
     public void add(User user) {
         sessionFactory.getCurrentSession().save(user);
     }
-
-
-
-
-
-
-
-
-
-
 
 
 
