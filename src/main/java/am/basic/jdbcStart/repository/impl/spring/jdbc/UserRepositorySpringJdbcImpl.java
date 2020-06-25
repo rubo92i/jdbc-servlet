@@ -4,8 +4,10 @@ import am.basic.jdbcStart.model.User;
 import am.basic.jdbcStart.repository.UserRepository;
 import lombok.Data;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.jdbc.core.RowMapper;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 @Data
@@ -22,7 +24,6 @@ public class UserRepositorySpringJdbcImpl implements UserRepository {
 
     @Override
     public void update(User user) {
-
     }
 
     @Override
@@ -42,16 +43,13 @@ public class UserRepositorySpringJdbcImpl implements UserRepository {
 
     @Override
     public User getById(int id) {
-        return null;
+        User user = jdbcTemplate.queryForObject("SELECT * FROM user WHERE id = " + id,new UserMapper());
+        return user;
     }
 
     @Override
     public User getByUsername(String username) {
-        User user = null;
-        SqlRowSet sqlRowSet = jdbcTemplate.queryForRowSet("SELECT * FROM  user  WHERE username = ?", username);
-        if (sqlRowSet.next()) {
-            user = fromRowSet(sqlRowSet);
-        }
+        User user = jdbcTemplate.queryForObject("SELECT * FROM  user  WHERE username = " + username, new UserMapper());
         return user;
     }
 
@@ -62,15 +60,21 @@ public class UserRepositorySpringJdbcImpl implements UserRepository {
     }
 
 
-    private User fromRowSet(SqlRowSet sqlRowSet) {
-        User user = new User();
-        user.setId(sqlRowSet.getInt("id"));
-        user.setName(sqlRowSet.getString("name"));
-        user.setSurname(sqlRowSet.getString("surname"));
-        user.setCode(sqlRowSet.getString("code"));
-        user.setUsername(sqlRowSet.getString("username"));
-        user.setPassword(sqlRowSet.getString("password"));
-        user.setStatus(sqlRowSet.getInt("status"));
-        return user;
+    public static class UserMapper implements RowMapper<User> {
+
+        @Override
+        public User mapRow(ResultSet sqlRowSet, int rowNum) throws SQLException {
+            User user = new User();
+            user.setId(sqlRowSet.getInt("id"));
+            user.setName(sqlRowSet.getString("name"));
+            user.setSurname(sqlRowSet.getString("surname"));
+            user.setCode(sqlRowSet.getString("code"));
+            user.setUsername(sqlRowSet.getString("username"));
+            user.setPassword(sqlRowSet.getString("password"));
+            user.setStatus(sqlRowSet.getInt("status"));
+            return user;
+        }
     }
+
+
 }

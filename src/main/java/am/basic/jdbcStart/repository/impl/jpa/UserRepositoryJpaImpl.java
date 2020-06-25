@@ -51,7 +51,7 @@ public class UserRepositoryJpaImpl implements UserRepository {
 
     @Override
     public List<User> findByName(String name) {
-        String query = "SELECT * FROM user WHERE name = %:nameParameters";
+        String query = "SELECT * FROM user WHERE name LIKE(CONCAT('%',:nameParameter,'%'))";
         Session session = sessionFactory.openSession();
         NativeQuery<User> nativeQuery = session.createNativeQuery(query, User.class);
         nativeQuery.setParameter("nameParameter", name);

@@ -8,8 +8,11 @@ import am.basic.jdbcStart.model.exceptions.UnverifiedException;
 import am.basic.jdbcStart.repository.UserRepository;
 import am.basic.jdbcStart.util.encoder.Generator;
 import am.basic.jdbcStart.util.encoder.Md5Encoder;
+import org.springframework.transaction.annotation.Transactional;
 
 import static am.basic.jdbcStart.util.constants.Messages.*;
+
+
 
 public class UserService {
 
@@ -19,13 +22,20 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void register(User user) throws DuplicateDataException {
+
+    @Transactional
+
+     public void register(User user) throws DuplicateDataException {
         User duplicate = userRepository.getByUsername(user.getUsername());
         DuplicateDataException.check(duplicate != null, DUPLICATE_USER_MESSAGE);
         user.setPassword(Md5Encoder.encode(user.getPassword()));
         user.setCode(Generator.getRandomDigits(5));
         user.setStatus(0);
         userRepository.add(user);
+
+
+        //throw exception
+        //send mail throws some exception
     }
 
 
