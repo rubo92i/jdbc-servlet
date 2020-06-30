@@ -20,6 +20,7 @@ public class DaoConfig {
         dataSource.setPassword("");
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setSuppressClose(true);
+
         return dataSource;
     }
 

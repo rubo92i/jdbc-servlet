@@ -5,11 +5,10 @@ import am.basic.jdbcStart.model.exceptions.AccessDeniedException;
 import am.basic.jdbcStart.model.exceptions.DuplicateDataException;
 import am.basic.jdbcStart.model.exceptions.NotFoundException;
 import am.basic.jdbcStart.model.exceptions.UnverifiedException;
-import am.basic.jdbcStart.repository.UserRepository;
+import am.basic.jdbcStart.repository.impl.spring.crud.UserRepositoryCrud;
 import am.basic.jdbcStart.util.encoder.Generator;
 import am.basic.jdbcStart.util.encoder.Md5Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,11 +18,11 @@ import static am.basic.jdbcStart.util.constants.Messages.*;
 @Service
 public class UserService {
 
-    private UserRepository userRepository;
+    private UserRepositoryCrud userRepository;
 
 
     @Autowired
-    public UserService(@Qualifier("sdffgbjhbnsdjjn") UserRepository userRepository) {
+    public UserService(UserRepositoryCrud userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -36,7 +35,7 @@ public class UserService {
         user.setPassword(Md5Encoder.encode(user.getPassword()));
         user.setCode(Generator.getRandomDigits(5));
         user.setStatus(0);
-        userRepository.add(user);
+        userRepository.save(user);
 
 
         //throw exception
@@ -57,24 +56,26 @@ public class UserService {
         NotFoundException.check(user == null, USER_NOT_EXIST_MESSAGE);
         AccessDeniedException.check(!user.getPassword().equals(password), WRONG_PASSWORD_MESSAGE);
         user.setPassword(newPassword);
-        userRepository.update(user);
+        userRepository.save(user);
         return user;
     }
 
+    @Transactional
     public void sendCode(String username) throws NotFoundException {
-        User user = userRepository.getByUsername(username);
+        User user = userRepository.getByUserN(username);
         NotFoundException.check(user == null, USER_NOT_EXIST_MESSAGE);
         user.setCode(Generator.getRandomDigits(5));
         //send code to user by email
-        userRepository.update(user);
+        userRepository.save(user);
     }
 
+    @Transactional
     public void recoverPassword(String username, String code, String password) throws NotFoundException, AccessDeniedException {
         User user = userRepository.getByUsername(username);
         NotFoundException.check(user == null, USER_NOT_EXIST_MESSAGE);
         AccessDeniedException.check(!user.getCode().equals(code), WRONG_CODE_MESSAGE);
         user.setPassword(password);
-        userRepository.update(user);
+        userRepository.save(user);
     }
 
     public void verify(String username, String code) throws NotFoundException, AccessDeniedException {
@@ -82,7 +83,7 @@ public class UserService {
         NotFoundException.check(user == null, USER_NOT_EXIST_MESSAGE);
         AccessDeniedException.check(!user.getCode().equals(code), WRONG_CODE_MESSAGE);
         user.setStatus(1);
-        userRepository.update(user);
+        userRepository.save(user);
     }
 
 }
