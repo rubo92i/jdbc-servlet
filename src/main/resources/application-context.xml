@@ -8,11 +8,53 @@
 
     <context:component-scan base-package="am.basic.jdbcStart"/>
 
+    <tx:annotation-driven/>
+
+<!--    <bean name="userRepositorySpringJdbc" class="am.basic.jdbcStart.repository.impl.spring.jdbc.UserRepositorySpringJdbcImpl">-->
+<!--        <property name="jdbcTemplate" ref="jdbcTemplate"/>-->
+<!--    </bean>-->
+
+<!--
+    <bean name="userRepository" class="am.basic.jdbcStart.repository.impl.jpa.UserRepositoryJpaImpl" init-method="onCreate"/>
+
+
+    <bean name="userRepositoryJdbc" class="am.basic.jdbcStart.repository.impl.jdbc.UserRepositoryJdbcImpl">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
+
+
+    <bean name="userRepositorySpringJpa"
+          class="am.basic.jdbcStart.repository.impl.spring.jpa.UserRepositorySpringJpaImpl" scope="prototype">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 
     <bean name="commentRepositoryJdbc" class="am.basic.jdbcStart.repository.impl.jdbc.CommentRepositoryJdbcImpl">
         <property name="dataSource" ref="dataSource"/>
-    </bean>
+    </bean>-->
 
+
+<!--    <bean name="userService" class="am.basic.jdbcStart.service.UserService">-->
+<!--        <constructor-arg name="userRepository" ref="userRepositorySpringJpa"/>-->
+<!--    </bean>-->
+
+
+<!--    <bean name="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">-->
+<!--        <property name="dataSource" ref="dataSource"/>-->
+<!--    </bean>-->
+
+    <!-- <bean name="dataSource" class="org.springframework.jdbc.datasource.SingleConnectionDataSource">
+      <property name="url" value="jdbc:mysql://localhost:3306/test"/>
+      <property name="username" value="root"/>
+      <property name="password" value=""/>
+      <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+      <property name="suppressClose" value="true"/>
+  </bean>-->
+
+
+
+    <bean name="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 
 
 
@@ -29,23 +71,9 @@
         </property>
     </bean>
 
-    <bean name="dataSource" class="org.springframework.jdbc.datasource.SingleConnectionDataSource">
-        <property name="url" value="jdbc:mysql://localhost:3306/test"/>
-        <property name="username" value="root"/>
-        <property name="password" value=""/>
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="suppressClose" value="true"/>
-    </bean>
-
-    <bean name="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-
-    <bean name="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
 
 
-    <tx:annotation-driven/>
+
+
 
 </beans>
