@@ -3,17 +3,25 @@ package am.basic.jdbcStart.repository.impl.spring.jdbc;
 import am.basic.jdbcStart.model.User;
 import am.basic.jdbcStart.repository.UserRepository;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+
 @Data
+@Repository  //default singleton name userRepositorySpringJdbcImpl
 public class UserRepositorySpringJdbcImpl implements UserRepository {
 
+    @Autowired
     private JdbcTemplate jdbcTemplate;
+
+
+
 
     @Override
     public void add(User user) {
@@ -49,7 +57,7 @@ public class UserRepositorySpringJdbcImpl implements UserRepository {
 
     @Override
     public User getByUsername(String username) {
-        User user = jdbcTemplate.queryForObject("SELECT * FROM  user  WHERE username = " + username, new UserMapper());
+        User user = jdbcTemplate.queryForObject("SELECT * FROM  user  WHERE username = '" + username +"'", new UserMapper());
         return user;
     }
 

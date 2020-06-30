@@ -8,24 +8,29 @@ import am.basic.jdbcStart.model.exceptions.UnverifiedException;
 import am.basic.jdbcStart.repository.UserRepository;
 import am.basic.jdbcStart.util.encoder.Generator;
 import am.basic.jdbcStart.util.encoder.Md5Encoder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import static am.basic.jdbcStart.util.constants.Messages.*;
 
 
-
+@Service
 public class UserService {
 
     private UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+
+    @Autowired
+    public UserService(@Qualifier("sdffgbjhbnsdjjn") UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
 
     @Transactional
+    public void register(User user) throws DuplicateDataException {
 
-     public void register(User user) throws DuplicateDataException {
         User duplicate = userRepository.getByUsername(user.getUsername());
         DuplicateDataException.check(duplicate != null, DUPLICATE_USER_MESSAGE);
         user.setPassword(Md5Encoder.encode(user.getPassword()));

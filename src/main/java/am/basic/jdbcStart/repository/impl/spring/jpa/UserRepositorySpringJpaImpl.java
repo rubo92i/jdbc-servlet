@@ -3,13 +3,17 @@ package am.basic.jdbcStart.repository.impl.spring.jpa;
 import am.basic.jdbcStart.model.User;
 import am.basic.jdbcStart.repository.UserRepository;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Repository
 public class UserRepositorySpringJpaImpl implements UserRepository {
 
 
+    @Autowired
     private SessionFactory sessionFactory;
 
     public SessionFactory getSessionFactory() {

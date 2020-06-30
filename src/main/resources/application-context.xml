@@ -1,38 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd"
        default-init-method="init">
 
 
-    <bean name="userRepositorySpringJdbc"
-          class="am.basic.jdbcStart.repository.impl.spring.jdbc.UserRepositorySpringJdbcImpl">
-        <property name="jdbcTemplate" ref="jdbcTemplate"/>
-    </bean>
+    <context:component-scan base-package="am.basic.jdbcStart"/>
 
-
-    <bean name="userRepositoryJpa" class="am.basic.jdbcStart.repository.impl.jpa.UserRepositoryJpaImpl"
-          init-method="onCreate"/>
-
-
-    <bean name="userRepositoryJdbc" class="am.basic.jdbcStart.repository.impl.jdbc.UserRepositoryJdbcImpl">
-        <constructor-arg name="dataSource" ref="dataSource"/>
-    </bean>
-
-
-    <bean name="userRepositorySpringJpa"
-          class="am.basic.jdbcStart.repository.impl.spring.jpa.UserRepositorySpringJpaImpl">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
 
     <bean name="commentRepositoryJdbc" class="am.basic.jdbcStart.repository.impl.jdbc.CommentRepositoryJdbcImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
 
-    <bean name="userService" class="am.basic.jdbcStart.service.UserService">
-        <constructor-arg name="userRepository" ref="userRepositorySpringJpa"/>
-    </bean>
 
 
     <bean name="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">

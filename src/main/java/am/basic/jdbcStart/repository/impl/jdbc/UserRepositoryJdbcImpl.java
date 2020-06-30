@@ -3,6 +3,9 @@ package am.basic.jdbcStart.repository.impl.jdbc;
 import am.basic.jdbcStart.model.User;
 import am.basic.jdbcStart.model.exceptions.DatabaseException;
 import am.basic.jdbcStart.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -12,11 +15,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Qualifier("sdffgbjhbnsdjjn")
+@Repository
 public class UserRepositoryJdbcImpl implements UserRepository {
 
 
     private DataSource dataSource;
 
+    @Autowired
     public UserRepositoryJdbcImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }
